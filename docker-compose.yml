@@ -1,0 +1,22 @@
+services:
+  db:
+    container_name: postgres-authService
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: splash
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/authService
+      POSTGRES_DB: authService
+    ports:
+      - "5433:5432"
+    volumes:
+      - db:/data/authService
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+volumes:
+  db:
